@@ -1,4 +1,4 @@
-package org.throwable.amqp.utils.json.exception;
+package org.throwable.amqp.exception;
 
 /**
  * @author zjc

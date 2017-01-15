@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
-import org.throwable.amqp.utils.json.exception.JsonParseException;
+import org.throwable.amqp.exception.JsonParseException;
 import org.throwable.amqp.utils.resource.ResourceUtils;
 import org.throwable.amqp.utils.stream.StreamsUtils;
 
@@ -83,7 +83,7 @@ public final class JacksonMapper {
         try {
             return mapper.writeValueAsString(value);
         } catch (JsonProcessingException e) {
-            logger.error("process object value to json string fail");
+            logger.error("process object value to json string failed");
             throw new JsonParseException(e);
         }
     }

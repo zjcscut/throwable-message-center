@@ -1,3 +1,4 @@
 server:
   port: 9091
   display-name: whtr-message-center
+

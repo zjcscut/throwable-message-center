@@ -17,4 +17,6 @@ public interface BeanRegisterHandler {
     <T> T loadBeanFromContext(String beanName,Class<T> clazz);
 
     <T> T loadBeanFromContext(Class<T> clazz);
+
+    void removeBeanFromContext(String beanName);
 }

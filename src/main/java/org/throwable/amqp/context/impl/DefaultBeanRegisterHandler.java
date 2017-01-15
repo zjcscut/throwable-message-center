@@ -22,45 +22,54 @@ import org.throwable.amqp.utils.resource.ClassUtils;
 @Service
 public class DefaultBeanRegisterHandler implements BeanRegisterHandler, ApplicationContextAware {
 
-    private ApplicationContext context;
+	private ApplicationContext context;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.context = applicationContext;
+	}
 
+	@Override
+	public void registerBeanDefinition(BeanDefinitionComponent component) {
+		BeanDefinition beanDefinition = BeanRegisterComponentFactory.processBeanDefinitionComponent(component);
+		getDefaultListableBeanFactory().registerBeanDefinition(component.getBeanName(), beanDefinition);
+	}
 
-    @Override
-    public void registerBeanDefinition(BeanDefinitionComponent component) {
-        ConfigurableApplicationContext configurableApplicationContext
-                = (ConfigurableApplicationContext) context;
-        DefaultListableBeanFactory beanDefinitionRegistry
-                = (DefaultListableBeanFactory ) configurableApplicationContext.getBeanFactory();
-        BeanDefinition beanDefinition = BeanRegisterComponentFactory.processBeanDefinitionComponent(component);
-        beanDefinitionRegistry.registerBeanDefinition(component.getBeanName(), beanDefinition);
-    }
+	@Override
+	public Class<?> loadContextClass(String className) {
+		try {
+			return ClassUtils.getClassLoader().loadClass(className);
+		} catch (ClassNotFoundException e) {
+			throw new BeanRegisterHandleException(e);
+		}
+	}
 
-    @Override
-    public Class<?> loadContextClass(String className) {
-        try {
-            return ClassUtils.getClassLoader().loadClass(className);
-        } catch (ClassNotFoundException e) {
-            throw new BeanRegisterHandleException(e);
-        }
-    }
-
-    @Override
-    public Object loadBeanFromContext(String beanName) {
-        return context.getBean(beanName);
-    }
+	@Override
+	public Object loadBeanFromContext(String beanName) {
+		return context.getBean(beanName);
+	}
 
 	@Override
 	public <T> T loadBeanFromContext(String beanName, Class<T> clazz) {
-		return context.getBean(beanName,clazz);
+		return context.getBean(beanName, clazz);
 	}
 
 	@Override
 	public <T> T loadBeanFromContext(Class<T> clazz) {
 		return context.getBean(clazz);
+	}
+
+	@Override
+	public void removeBeanFromContext(String beanName) {
+		DefaultListableBeanFactory beanFactory = getDefaultListableBeanFactory();
+		if (beanFactory.containsBeanDefinition(beanName)) {
+			beanFactory.removeBeanDefinition(beanName);
+		}
+	}
+
+
+	private DefaultListableBeanFactory getDefaultListableBeanFactory() {
+		ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) context;
+		return (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
 	}
 }
