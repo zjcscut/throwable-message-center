@@ -53,4 +53,14 @@ public class DefaultBeanRegisterHandler implements BeanRegisterHandler, Applicat
     public Object loadBeanFromContext(String beanName) {
         return context.getBean(beanName);
     }
+
+	@Override
+	public <T> T loadBeanFromContext(String beanName, Class<T> clazz) {
+		return context.getBean(beanName,clazz);
+	}
+
+	@Override
+	public <T> T loadBeanFromContext(Class<T> clazz) {
+		return context.getBean(clazz);
+	}
 }

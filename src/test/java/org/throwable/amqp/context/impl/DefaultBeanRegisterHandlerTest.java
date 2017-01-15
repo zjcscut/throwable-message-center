@@ -7,7 +7,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.throwable.Application;
+import org.throwable.amqp.context.BeanDefinitionComponent;
 import org.throwable.amqp.context.BeanRegisterHandler;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -26,10 +32,17 @@ public class DefaultBeanRegisterHandlerTest {
 
     @Test
     public void test1() throws Exception {
-//        defaultBeanRegisterHandler.registerBeanDefinition("org.throwable.amqp.context.impl.UserService");
+		BeanDefinitionComponent componentU = new BeanDefinitionComponent(UserDAO.class);
+		defaultBeanRegisterHandler.registerBeanDefinition(componentU);
 
-        Object bean = defaultBeanRegisterHandler.loadBeanFromContext("org.throwable.amqp.context.impl.UserService");
-        UserService userService = (UserService) bean;
+		BeanDefinitionComponent component = new BeanDefinitionComponent(UserService.class);
+
+		Map<String,String> ref = new HashMap<>(1);
+		ref.put("userDAO","userDAO");
+		component.setBeanPropertyReferences(ref);
+        defaultBeanRegisterHandler.registerBeanDefinition(component);
+
+		UserService userService = defaultBeanRegisterHandler.loadBeanFromContext(UserService.class);
         userService.test();
     }
 
