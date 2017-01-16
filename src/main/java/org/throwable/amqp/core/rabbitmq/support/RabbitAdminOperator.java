@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author zhangjinci
  * @version 2017/1/16 16:15
- * @function
+ * @function rabbitmq超级管理员操作,声明Queue、Exchange、Binding
  */
 
 public class RabbitAdminOperator {
@@ -66,7 +66,7 @@ public class RabbitAdminOperator {
     }
 
 
-    public List<Binding> buildBindings(List<BindingParameters> bindingParameters) {
+    private List<Binding> buildBindings(List<BindingParameters> bindingParameters) {
         List<Binding> bindings = new ArrayList<>(bindingParameters.size());
         for (BindingParameters bindingSingle : bindingParameters) {
             bindings.add(transferBinding(bindingSingle));
@@ -81,9 +81,9 @@ public class RabbitAdminOperator {
      * @return Binding
      */
     private Binding transferBinding(BindingParameters bindingSingle) {
-        Binding binding;
         Assert.hasText(bindingSingle.getExchangeType());
         String type = bindingSingle.getExchangeType().toUpperCase();
+		Binding binding;
         switch (ExchangeEnum.valueOf(type)) {
             case DIRECT:
                 binding = BindingBuilder.bind(createQueue(bindingSingle.getQueueName()))
@@ -125,7 +125,7 @@ public class RabbitAdminOperator {
     }
 
 
-    public List<Exchange> buildExchanges(List<BindingParameters> bindingParameters) {
+    private List<Exchange> buildExchanges(List<BindingParameters> bindingParameters) {
         List<Exchange> exchanges = new ArrayList<>(bindingParameters.size());
         for (BindingParameters exchange : bindingParameters) {
             exchanges.add(createExchange(exchange.getExchangeName(), exchange.getExchangeType()));
@@ -145,9 +145,9 @@ public class RabbitAdminOperator {
 
 
     private Exchange transferExchanges(String name, String type) {
-        Exchange exchange;
         Assert.hasText(type);
         String typeName = type.toUpperCase();
+		Exchange exchange;
         switch (ExchangeEnum.valueOf(typeName)) {
             case DIRECT:
                 exchange = new DirectExchange(name);

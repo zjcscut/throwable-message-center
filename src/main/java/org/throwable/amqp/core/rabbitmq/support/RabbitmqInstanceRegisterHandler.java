@@ -54,8 +54,7 @@ public class RabbitmqInstanceRegisterHandler {
                                              List<BindingParameters> bindingParameters) {
         BeanDefinitionComponent component = RabbitmqInstanceComponentFactory.createRabbitAdminBeanComponent(factory);
         beanRegisterHandler.registerBeanDefinition(component);
-        RabbitAdmin rabbitAdmin = beanRegisterHandler.loadBeanFromContext(component.getBeanName(),
-                RabbitAdmin.class);
+        RabbitAdmin rabbitAdmin = beanRegisterHandler.loadBeanFromContext(component.getBeanName(), RabbitAdmin.class);
         RabbitAdminOperator operator = new RabbitAdminOperator(rabbitAdmin);
         operator.init(bindingParameters);
     }

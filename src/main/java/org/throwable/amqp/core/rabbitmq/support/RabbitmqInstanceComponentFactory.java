@@ -20,12 +20,6 @@ import java.util.Map;
  */
 public class RabbitmqInstanceComponentFactory {
 
-
-    public static BeanDefinitionComponent createRabbitmqBeanDefinitionComponent() {
-        BeanDefinitionComponent component = new BeanDefinitionComponent();
-        return component;
-    }
-
     @Deprecated
     public static CachingConnectionFactory createCachingConnectionFactory(ConfigurationParameters configurationParameters) {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();

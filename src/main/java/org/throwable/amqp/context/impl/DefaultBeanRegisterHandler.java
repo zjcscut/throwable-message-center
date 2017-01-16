@@ -16,7 +16,7 @@ import org.throwable.amqp.utils.resource.ClassUtils;
 /**
  * @author zhangjinci
  * @version 2017/1/14 16:28
- * @function
+ * @function Bean注册器默认实现
  */
 @Service
 public class DefaultBeanRegisterHandler implements BeanRegisterHandler, ApplicationContextAware {
