@@ -6,4 +6,8 @@ package org.throwable.amqp.core.rabbitmq.constants;
  * @description
  */
 public enum  ExchangeEnum {
+    DIRECT,
+    TOPIC,
+    HEADERS,
+    FANOUT
 }

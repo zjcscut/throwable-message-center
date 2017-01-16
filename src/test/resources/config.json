@@ -1,0 +1,44 @@
+[
+  {
+    "configurationParameters": {
+      "username": "guest",
+      "password": "guest",
+      "host": "localhost",
+      "port": 5672,
+      "virtualHost": "/",
+      "publisherReturns": true,
+      "mandatory": true,
+      "retryPolicy": null
+    },
+    "bindingParametersList": [
+      {
+        "queueName": "queue-1",
+        "exchangeName": "exchange1",
+        "exchangeType": "DIRECT",
+        "routingKey": "queue-key-1",
+        "description": "111111"
+      }
+    ]
+  },
+  {
+    "configurationParameters": {
+      "username": "guest",
+      "password": "guest",
+      "host": "192.168.1.39",
+      "port": 5672,
+      "virtualHost": "/",
+      "publisherReturns": true,
+      "mandatory": true,
+      "retryPolicy": null
+    },
+    "bindingParametersList": [
+      {
+        "queueName": "queue-2",
+        "exchangeName": "exchange2",
+        "exchangeType": "DIRECT",
+        "routingKey": "queue-key-2",
+        "description": "2222222"
+      }
+    ]
+  }
+]

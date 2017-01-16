@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.throwable</groupId>
-    <artifactId>whtr-message-center</artifactId>
+    <artifactId>throwable-message-center</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>whtr-message-center</name>
+    <name>throwable-message-center</name>
 
 
     <properties>
@@ -56,11 +56,11 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.2.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.mybatis.spring.boot</groupId>-->
+            <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
+            <!--<version>1.2.0</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -109,7 +109,7 @@
 
     </dependencies>
     <build>
-        <finalName>whtr-message-center</finalName>
+        <finalName>throwable-message-center</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

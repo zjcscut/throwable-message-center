@@ -33,6 +33,8 @@ public class RabbitmqInstance {
 	 */
 	private RabbitManagementTemplate rabbitManagementTemplate;
 
+	public RabbitmqInstance() {
+	}
 
 	public CachingConnectionFactory getCachingConnectionFactory() {
 		return cachingConnectionFactory;
