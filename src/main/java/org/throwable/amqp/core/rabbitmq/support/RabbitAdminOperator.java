@@ -75,15 +75,15 @@ public class RabbitAdminOperator {
     }
 
     /**
-     * 根据Exchange类型进行Binding装换
+     * 根据Exchange类型进行Binding封装
      *
      * @param bindingSingle bindingSingle
      * @return Binding
      */
     private Binding transferBinding(BindingParameters bindingSingle) {
         Binding binding;
+        Assert.hasText(bindingSingle.getExchangeType());
         String type = bindingSingle.getExchangeType().toUpperCase();
-        Assert.hasText(type);
         switch (ExchangeEnum.valueOf(type)) {
             case DIRECT:
                 binding = BindingBuilder.bind(createQueue(bindingSingle.getQueueName()))
@@ -146,8 +146,8 @@ public class RabbitAdminOperator {
 
     private Exchange transferExchanges(String name, String type) {
         Exchange exchange;
+        Assert.hasText(type);
         String typeName = type.toUpperCase();
-        Assert.hasText(typeName);
         switch (ExchangeEnum.valueOf(typeName)) {
             case DIRECT:
                 exchange = new DirectExchange(name);

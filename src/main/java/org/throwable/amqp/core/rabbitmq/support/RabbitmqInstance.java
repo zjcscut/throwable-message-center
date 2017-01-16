@@ -10,6 +10,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
  * @version 2017/1/15 21:23
  * @description rabbitmq实例
  */
+@Deprecated
 public class RabbitmqInstance {
 
 	/**
