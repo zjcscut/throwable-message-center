@@ -1,4 +1,4 @@
 server:
   port: 9091
-  display-name: whtr-message-center
+  display-name: throwable-message-center
 
